@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Onesite</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
+</head>
+<body class="bg-dark">
+
+<h3 style="margin: 10px" class="text-light">Onesite:</h3>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-12 card">
+            <div class="card-body">
+
+                <form id="sitebuilder" action="/build" method="post" enctype=multipart/form-data>
+
+
+                    <button class="btn btn-success">Create Site</button>
+                    <br>
+
+                    {{ edited|safe }}
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+<button onclick="createnew();" class="btn btn-warning">Add New Block</button>
+
+<script>
+
+
+
+var count = 0;
+
+function createnew() {
+
+    var header = document.createElement("p");
+    header.innerHTML = "Title " + count;
+
+    var title = document.createElement("input");
+    title.setAttribute("name", "title" + count);
+    title.setAttribute("class", "form-control");
+
+    var header1 = document.createElement("p");
+    header1.innerHTML = "Background Image " + count;
+
+    var image = document.createElement("input");
+    image.setAttribute("name", "image" + count);
+    image.setAttribute("type", "file");
+
+    var node = document.createElement("TEXTAREA");// Create a <li> node
+    node.setAttribute("id", "summernote" + count);
+    node.setAttribute("name", "editor" + count);         // Create a text node
+                                                         // Append the text to <li>
+
+    document.getElementById("sitebuilder").appendChild(header);
+    document.getElementById("sitebuilder").appendChild(title);
+    document.getElementById("sitebuilder").appendChild(header1);
+    document.getElementById("sitebuilder").appendChild(image);
+    document.getElementById("sitebuilder").appendChild(node);
+
+    var temp = "#summernote" + count;
+    $(temp).summernote();
+
+    count = count + 1;
+
+}
+</script>
+
+</body>
+</html>
